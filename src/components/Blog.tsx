@@ -1,8 +1,11 @@
 
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const Blog = () => {
+  const navigate = useNavigate();
+
   const posts = [
     {
       title: "Understanding Post-Quantum Cryptography: A Practical Guide",
@@ -10,7 +13,7 @@ const Blog = () => {
       date: "2024-05-15",
       readTime: "8 min read",
       category: "Cryptography",
-      slug: "post-quantum-cryptography-guide"
+      slug: "/blog/post-quantum-cryptography-guide"
     },
     {
       title: "Building Resilient Edge Computing Systems",
@@ -18,7 +21,7 @@ const Blog = () => {
       date: "2024-04-22",
       readTime: "6 min read", 
       category: "Edge Computing",
-      slug: "resilient-edge-computing-systems"
+      slug: "/blog/resilient-edge-computing-systems"
     },
     {
       title: "Security Considerations for Embedded Systems in Space",
@@ -26,7 +29,7 @@ const Blog = () => {
       date: "2024-03-18",
       readTime: "10 min read",
       category: "Space Technology",
-      slug: "embedded-systems-space-security"
+      slug: "/blog/embedded-systems-space-security"
     }
   ];
 
@@ -46,7 +49,7 @@ const Blog = () => {
               key={index}
               className="glass-card rounded-xl p-6 hover-lift animate-fade-in-up cursor-pointer group"
               style={{ animationDelay: `${index * 0.1}s` }}
-              onClick={() => console.log(`Navigate to blog post: ${post.slug}`)}
+              onClick={() => navigate(post.slug)}
             >
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-sm text-primary">

@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import PostQuantumCryptographyGuide from "./pages/blog/PostQuantumCryptographyGuide";
+import ResilientEdgeComputingSystems from "./pages/blog/ResilientEdgeComputingSystems";
+import EmbeddedSystemsSpaceSecurity from "./pages/blog/EmbeddedSystemsSpaceSecurity";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +22,9 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/blog/post-quantum-cryptography-guide" element={<PostQuantumCryptographyGuide />} />
+            <Route path="/blog/resilient-edge-computing-systems" element={<ResilientEdgeComputingSystems />} />
+            <Route path="/blog/embedded-systems-space-security" element={<EmbeddedSystemsSpaceSecurity />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
