@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Github, Linkedin, Menu, X } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +64,7 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Social Links */}
+          {/* Social Links and Theme Toggle */}
           <div className="hidden md:flex items-center space-x-4">
             <a
               href="https://github.com/mluna030"
@@ -81,6 +82,7 @@ const Navigation = () => {
             >
               <Linkedin className="h-5 w-5" />
             </a>
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
@@ -124,6 +126,7 @@ const Navigation = () => {
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
+                <ThemeToggle />
               </div>
             </div>
           </div>
