@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { Github, Linkedin, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Navigation = () => {
@@ -10,8 +9,8 @@ const Navigation = () => {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'blog', label: 'Blog' },
+    { id: 'work', label: 'Work' },
+    { id: 'writing', label: 'Writing' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -42,92 +41,60 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 glass-card">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="text-xl font-semibold text-primary">
-            Michael Luna
-          </div>
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection('home')}
+            className="text-xl font-bold text-foreground hover:text-primary transition-colors focus-ring rounded-lg px-2 py-1"
+          >
+            ML
+          </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${
+                className={`text-sm font-medium transition-colors duration-200 hover:text-primary focus-ring rounded-lg px-3 py-2 ${
                   activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
                 }`}
               >
                 {item.label}
               </button>
             ))}
-          </div>
-
-          {/* Social Links and Theme Toggle */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="https://github.com/mluna030"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors duration-200"
-            >
-              <Github className="h-5 w-5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/michael-luna6262/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors duration-200"
-            >
-              <Linkedin className="h-5 w-5" />
-            </a>
             <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-foreground"
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="md:hidden flex items-center gap-4">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-foreground focus-ring rounded-lg p-2"
+            >
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-3">
+          <div className="md:hidden border-t border-border/40 py-4">
+            <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-left text-sm font-medium transition-colors duration-200 hover:text-primary ${
+                  className={`text-left text-base font-medium transition-colors duration-200 hover:text-primary focus-ring rounded-lg px-3 py-2 ${
                     activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
                   }`}
                 >
                   {item.label}
                 </button>
               ))}
-              <div className="flex items-center space-x-4 pt-4">
-                <a
-                  href="https://github.com/mluna030"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                >
-                  <Github className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/michael-luna6262/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-200"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </a>
-                <ThemeToggle />
-              </div>
             </div>
           </div>
         )}

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,7 +9,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,145 +25,124 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     setTimeout(() => {
       toast({
         title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
+        description: "I'll get back to you soon.",
       });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
       setIsSubmitting(false);
     }, 1000);
   };
 
+  const contactLinks = [
+    {
+      icon: Mail,
+      label: "Email",
+      value: "michael.luna@example.com",
+      href: "mailto:michael.luna@example.com"
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: "Connect professionally",
+      href: "https://www.linkedin.com/in/michael-luna6262/"
+    },
+    {
+      icon: Github,
+      label: "GitHub",
+      value: "Check out my code",
+      href: "https://github.com/mluna030"
+    }
+  ];
+
   return (
-    <section id="contact" className="section-padding">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
+    <section id="contact" className="section-space">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-16 fade-in visible">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Let's discuss opportunities, collaborations, or just connect about technology
+            Let's discuss opportunities or collaborate on innovative projects
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="space-y-8">
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Info */}
+          <div className="space-y-8 fade-in visible" style={{ animationDelay: '0.2s' }}>
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Let's Connect</h3>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                I'm always interested in discussing new opportunities, innovative projects, or 
-                collaborating on cutting-edge research in cryptography and security systems.
+              <h3 className="text-xl font-semibold mb-4">Let's Connect</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                I'm interested in discussing new opportunities, innovative projects, or 
+                collaborating on research in cryptography and security systems.
               </p>
             </div>
 
-            <div className="space-y-6">
-              <a
-                href="mailto:michael.luna@example.com"
-                className="flex items-center gap-4 p-4 glass-card rounded-lg hover-lift transition-all duration-200 group"
-              >
-                <div className="p-3 rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-colors">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold">Email</h4>
-                  <p className="text-muted-foreground">michael.luna@example.com</p>
-                </div>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/michael-luna6262/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 glass-card rounded-lg hover-lift transition-all duration-200 group"
-              >
-                <div className="p-3 rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-colors">
-                  <Linkedin className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold">LinkedIn</h4>
-                  <p className="text-muted-foreground">Connect professionally</p>
-                </div>
-              </a>
-
-              <a
-                href="https://github.com/mluna030"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 glass-card rounded-lg hover-lift transition-all duration-200 group"
-              >
-                <div className="p-3 rounded-lg bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-colors">
-                  <Github className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold">GitHub</h4>
-                  <p className="text-muted-foreground">Check out my code</p>
-                </div>
-              </a>
+            <div className="space-y-4">
+              {contactLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="flex items-center gap-4 p-4 modern-card hover:border-primary/40 transition-all duration-300 group focus-ring rounded-xl"
+                >
+                  <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <link.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium">{link.label}</h4>
+                    <p className="text-sm text-muted-foreground">{link.value}</p>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
 
-          <div>
+          {/* Contact Form */}
+          <div className="fade-in visible" style={{ animationDelay: '0.4s' }}>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-secondary/50 border-border/50 focus:border-primary"
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Your email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-secondary/50 border-border/50 focus:border-primary"
-                  />
-                </div>
-              </div>
-
-              <div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input
                   type="text"
-                  name="subject"
-                  placeholder="Subject"
-                  value={formData.subject}
+                  name="name"
+                  placeholder="Your name"
+                  value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="bg-secondary/50 border-border/50 focus:border-primary"
+                  className="focus-ring"
+                />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Your email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="focus-ring"
                 />
               </div>
 
-              <div>
-                <Textarea
-                  name="message"
-                  placeholder="Your message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={6}
-                  className="bg-secondary/50 border-border/50 focus:border-primary resize-none"
-                />
-              </div>
+              <Textarea
+                name="message"
+                placeholder="Your message"
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+                rows={6}
+                className="resize-none focus-ring"
+              />
 
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                className="w-full gradient-button focus-ring"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
                   'Sending...'
                 ) : (
                   <>
-                    <Send className="h-5 w-5 mr-2" />
+                    <Send className="h-4 w-4 mr-2" />
                     Send Message
                   </>
                 )}

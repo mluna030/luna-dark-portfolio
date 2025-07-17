@@ -1,73 +1,67 @@
-
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Github, Shield, Cpu, Zap } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
     {
-      title: "Post-Quantum Cryptographic Embedded System",
-      subtitle: "NASA Artemis - Kepler 452B",
-      description: "Developed quantum-resistant cryptographic protocols for NASA's Artemis mission, implementing lattice-based encryption algorithms on resource-constrained embedded systems for secure space communications.",
+      title: "Post-Quantum Cryptographic System",
+      subtitle: "NASA Artemis",
+      description: "Quantum-resistant encryption protocols for secure space communications using lattice-based algorithms on embedded systems.",
       icon: Shield,
-      tech: ["C/C++", "CRYSTALS-Kyber", "ARM Cortex", "Real-time OS", "Cryptography"],
+      tech: ["C/C++", "CRYSTALS-Kyber", "ARM Cortex", "Real-time OS"],
       github: "#",
-      demo: "#",
-      featured: true
+      demo: "#"
     },
     {
-      title: "Edge Computing Platform for Real-Time Anomaly Detection",
-      subtitle: "Industrial IoT Systems",
-      description: "Built a distributed edge computing platform that processes sensor data in real-time to detect anomalies in industrial environments, reducing latency by 85% compared to cloud-based solutions.",
+      title: "Edge Computing Platform",
+      subtitle: "Industrial IoT",
+      description: "Real-time anomaly detection system processing sensor data with 85% latency reduction compared to cloud solutions.",
       icon: Cpu,
-      tech: ["Rust", "TensorFlow Lite", "Kubernetes", "MQTT", "Time Series DB"],
+      tech: ["Rust", "TensorFlow Lite", "Kubernetes", "MQTT"],
       github: "#",
-      demo: "#",
-      featured: true
+      demo: "#"
     },
     {
-      title: "Quantum-Safe Communication Protocol",
-      subtitle: "Research & Development",
-      description: "Designed and implemented a hybrid classical-quantum cryptographic protocol that maintains security against both classical and quantum attacks while optimizing for bandwidth efficiency.",
+      title: "Quantum-Safe Protocol",
+      subtitle: "Research Project",
+      description: "Hybrid cryptographic protocol maintaining security against classical and quantum attacks while optimizing bandwidth.",
       icon: Zap,
-      tech: ["Python", "OpenSSL", "Protocol Buffers", "Linux Kernel", "Network Security"],
+      tech: ["Python", "OpenSSL", "Protocol Buffers", "Linux"],
       github: "#",
-      demo: "#",
-      featured: false
+      demo: "#"
     }
   ];
 
   return (
-    <section id="projects" className="section-padding">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
+    <section id="work" className="section-space">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16 fade-in visible">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Selected Work</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Showcasing innovative solutions in cryptography, edge computing, and system security
+            Projects in cryptography, edge computing, and system security
           </p>
         </div>
 
-        <div className="grid gap-8 md:gap-12">
+        <div className="space-y-8">
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`glass-card rounded-xl p-8 hover-lift animate-fade-in-up ${
-                project.featured ? 'ring-2 ring-primary/20' : ''
-              }`}
+              className="modern-card p-8 hover:border-primary/40 transition-all duration-500 fade-in visible"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="grid md:grid-cols-3 gap-8 items-start">
-                <div className="md:col-span-2 space-y-6">
+              <div className="grid lg:grid-cols-4 gap-8 items-start">
+                <div className="lg:col-span-3 space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg bg-primary/10 border border-primary/20">
-                      <project.icon className="h-8 w-8 text-primary" />
+                    <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
+                      <project.icon className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-primary font-medium mb-4">{project.subtitle}</p>
+                      <h3 className="text-xl font-bold mb-1">{project.title}</h3>
+                      <p className="text-primary font-medium text-sm">{project.subtitle}</p>
                     </div>
                   </div>
                   
-                  <p className="text-lg leading-relaxed text-muted-foreground">
+                  <p className="text-muted-foreground leading-relaxed">
                     {project.description}
                   </p>
 
@@ -75,7 +69,7 @@ const Projects = () => {
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 bg-secondary/50 text-secondary-foreground rounded-full text-sm border border-border/50"
+                        className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm border border-border/40"
                       >
                         {tech}
                       </span>
@@ -83,21 +77,23 @@ const Projects = () => {
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="flex lg:flex-col gap-3">
                   <Button
                     variant="outline"
-                    className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    size="sm"
+                    className="flex-1 lg:w-full hover:bg-secondary focus-ring"
                     onClick={() => window.open(project.github, '_blank')}
                   >
                     <Github className="h-4 w-4 mr-2" />
-                    View Code
+                    Code
                   </Button>
                   <Button
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                    size="sm"
+                    className="flex-1 lg:w-full gradient-button focus-ring"
                     onClick={() => window.open(project.demo, '_blank')}
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />
-                    Live Demo
+                    Demo
                   </Button>
                 </div>
               </div>
@@ -105,14 +101,14 @@ const Projects = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 fade-in visible" style={{ animationDelay: '0.3s' }}>
           <Button
             variant="outline"
             size="lg"
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            className="hover:bg-secondary focus-ring px-8"
             onClick={() => window.open('https://github.com/mluna030', '_blank')}
           >
-            View All Projects on GitHub
+            View All Projects
           </Button>
         </div>
       </div>

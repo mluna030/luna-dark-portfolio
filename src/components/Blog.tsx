@@ -1,6 +1,4 @@
-
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Calendar, ArrowUpRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Blog = () => {
@@ -8,91 +6,69 @@ const Blog = () => {
 
   const posts = [
     {
-      title: "Understanding Post-Quantum Cryptography: A Practical Guide",
-      excerpt: "Exploring the fundamentals of quantum-resistant algorithms and their implementation challenges in real-world systems.",
+      title: "Post-Quantum Cryptography: A Practical Guide",
+      excerpt: "Fundamentals of quantum-resistant algorithms and implementation challenges",
       date: "2024-05-15",
-      readTime: "8 min read",
       category: "Cryptography",
       slug: "/blog/post-quantum-cryptography-guide"
     },
     {
       title: "Building Resilient Edge Computing Systems",
-      excerpt: "Lessons learned from developing real-time anomaly detection systems for industrial IoT environments.",
+      excerpt: "Lessons from developing real-time anomaly detection for industrial IoT",
       date: "2024-04-22",
-      readTime: "6 min read", 
       category: "Edge Computing",
       slug: "/blog/resilient-edge-computing-systems"
     },
     {
-      title: "Security Considerations for Embedded Systems in Space",
-      excerpt: "Deep dive into the unique security challenges and solutions for space-based computing systems.",
+      title: "Security for Embedded Systems in Space",
+      excerpt: "Unique security challenges and solutions for space-based computing",
       date: "2024-03-18",
-      readTime: "10 min read",
-      category: "Space Technology",
+      category: "Space Tech",
       slug: "/blog/embedded-systems-space-security"
     }
   ];
 
   return (
-    <section id="blog" className="section-padding bg-secondary/20">
+    <section id="writing" className="section-space bg-gradient-to-b from-background to-secondary/20">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Blog & Insights</h2>
+        <div className="text-center mb-16 fade-in visible">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Writing</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Sharing knowledge on cryptography, security, and cutting-edge technology
+            Thoughts on cryptography, security, and technology
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post, index) => (
             <article
               key={index}
-              className="glass-card rounded-xl p-6 hover-lift animate-fade-in-up cursor-pointer group"
+              className="modern-card p-6 hover:border-primary/40 transition-all duration-300 cursor-pointer group fade-in visible"
               style={{ animationDelay: `${index * 0.1}s` }}
               onClick={() => navigate(post.slug)}
             >
               <div className="space-y-4">
-                <div className="flex items-center gap-2 text-sm text-primary">
-                  <span className="px-2 py-1 bg-primary/10 rounded-full">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded-full">
                     {post.category}
                   </span>
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
                 </div>
 
-                <h3 className="text-xl font-semibold group-hover:text-primary transition-colors duration-200">
+                <h3 className="text-lg font-semibold group-hover:text-primary transition-colors duration-200 leading-tight">
                   {post.title}
                 </h3>
 
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {post.excerpt}
                 </p>
 
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>{new Date(post.date).toLocaleDateString()}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{post.readTime}</span>
-                    </div>
-                  </div>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <Calendar className="h-3 w-3" />
+                  <span>{new Date(post.date).toLocaleDateString()}</span>
                 </div>
               </div>
             </article>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            onClick={() => console.log('Navigate to full blog')}
-          >
-            View All Posts
-          </Button>
         </div>
       </div>
     </section>
