@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Navigation = () => {
@@ -32,12 +33,26 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+
+  // Determine if we're on a blog page (writing detail)
+  const isBlogPage = typeof window !== 'undefined' && window.location.pathname.startsWith('/blog/');
+
+  const navLinks = [
+    { id: 'home', label: 'Home', to: '/' },
+    { id: 'about', label: 'About', to: '/#about' },
+    { id: 'work', label: 'Work', to: '/#work' },
+    { id: 'writing', label: 'Writing', to: '/#writing' },
+    { id: 'contact', label: 'Contact', to: '/#contact' },
+  ];
+
+  const handleNav = (id: string) => {
+    if (!isBlogPage) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      setIsOpen(false);
     }
-    setIsOpen(false);
   };
 
   return (
@@ -45,25 +60,36 @@ const Navigation = () => {
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <button
-            onClick={() => scrollToSection('home')}
+          <Link
+            to="/"
             className="text-xl font-bold text-foreground hover:text-primary transition-colors focus-ring rounded-lg px-2 py-1"
           >
             ML
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-primary focus-ring rounded-lg px-3 py-2 ${
-                  activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
-                }`}
-              >
-                {item.label}
-              </button>
+            {navLinks.map((item) => (
+              isBlogPage ? (
+                <Link
+                  key={item.id}
+                  to={item.to}
+                  className={`text-sm font-medium transition-colors duration-200 hover:text-primary focus-ring rounded-lg px-3 py-2`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => handleNav(item.id)}
+                  className={`text-sm font-medium transition-colors duration-200 hover:text-primary focus-ring rounded-lg px-3 py-2 ${
+                    activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              )
             ))}
             <ThemeToggle />
           </div>
@@ -84,16 +110,27 @@ const Navigation = () => {
         {isOpen && (
           <div className="md:hidden border-t border-border/40 py-4">
             <div className="flex flex-col gap-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`text-left text-base font-medium transition-colors duration-200 hover:text-primary focus-ring rounded-lg px-3 py-2 ${
-                    activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
-                  }`}
-                >
-                  {item.label}
-                </button>
+              {navLinks.map((item) => (
+                isBlogPage ? (
+                  <Link
+                    key={item.id}
+                    to={item.to}
+                    className={`text-left text-base font-medium transition-colors duration-200 hover:text-primary focus-ring rounded-lg px-3 py-2`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNav(item.id)}
+                    className={`text-left text-base font-medium transition-colors duration-200 hover:text-primary focus-ring rounded-lg px-3 py-2 ${
+                      activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                )
               ))}
             </div>
           </div>

@@ -1,13 +1,14 @@
-
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import Navigation from '@/components/Navigation';
 
 const ResilientEdgeComputingSystems = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background">
+      <Navigation />
       <div className="max-w-4xl mx-auto px-6 py-20">
         <Button
           variant="ghost"
